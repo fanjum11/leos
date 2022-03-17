@@ -18,4 +18,4 @@ In this version, LEOs is build on Stacks directly using a LEO-token. In the futu
 
 
 
-# RECOMMENDED FLOW 
+## RECOMMENDED FLOW 
