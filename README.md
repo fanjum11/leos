@@ -31,11 +31,13 @@ Companies set up the web page with description and answers (THIS IS NOT COVERED 
 
 We next provide details about how each of these actors can leverage the LEOS platform. 
 
-** We do not focus on the contract creator (to be a DAO in the future here). **
-
-** We also do not focus on the front end. The focus is just on the smart contracts needed for a simple LEOS platform **
+** We do not focus on the front end. The focus is just on the smart contracts needed for a simple LEOS platform **
 
 
+### CONTRACT CREATOR
+The contract creator (to be a DAO in the future) will deploy the smart contract. 
+
+The contract creator will also transfer the unclaimed tokens of every test and the STX paid for the tokens to the contract creators wallet periodically.  The unclaimed tokens will be claimed after a predetermined interval of 10000 blocks.
 
 ### AS A COMPANY THAT WANTS TO REWARD PEOPLE FOR LEARNING
 
@@ -48,7 +50,7 @@ There are three intervals related to a test namely
 
 Finally the contract creator can get the tokens that are left over after the prize money is paid out. The left over could be because some winners did not claim the rewards or because the prize money had a remainder after being distributed to all the winners.
 
-We next explain the steps that a company has to follow briefly.  Detailed explanations follow this brief description. 
+We next explain the steps that a company has to follow briefly.  Detailed explanations follow this brief description. The focus here is not on the front end. Rather the focus is just on the smart contracts. 
 
 1. Use stacks to purchase the LEOS tokens.
 2. Use the LEOS tokens and provide test details that go the blockchain.
@@ -73,9 +75,17 @@ The company will then provide details of the tests to be captured on the blockch
 
 
 ### AS AN INDIVIDUAL THAT WANTS TO LEARN AND EARN 
-The individual is presented a web page with details of the various tests, topics of the test and prize money etc. The individual can select the tests he/she is interested in.  We do not show this portion in this draft. 
+The individual is presented a web page with details of the various tests, topics of the test and prize money etc. The individual can select the tests he/she is interested in.  We do not show the front end portion here. The focus is just on the smart contracts.  We expect this web page will interact with the smart contract according to the following steps.  
 
+The steps to be followed by the web page used by the individual are as follows. 
+1. get a list of all the tests and determine which tests are open and their topics. Show this list to the individual. The individual will decide the topics to learn and tests to answer. 
+2. The individual provides a hash of (test answers + secret) to be stored on the blockchain when the test is open. 
+3. The individual provides detailed answers to the test questions once the test is locked during the test winner decision interval and before the test reward claim interval starts. 
+4. The individual determines if he/she is in the winner list after providing the answers. 
+5. The individual gets a list of winners on the test and the prize money on the test once the winner decision interval ends. 
+6. The individual then claims his/her reward if a winner with the right amount of prize money.
 
+In the future probably the wallet of the individual could get the test questions, store the test answers and transmit the answer hash when the test is open and the detailed answers once the test is locked. the wallet can then also claim the rewards.  In this manner the individual will not need to trust any third party. 
 
 #### DETAILS
 
