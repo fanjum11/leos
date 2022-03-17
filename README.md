@@ -1,4 +1,4 @@
-# leos
-Learn to earn on stacks leveraging Stacks blockchain
+# H1 leos
+Learn to earn leveraging Stacks 
 
-this is a test
+Web3 based on blockchain technology is going to revolutionize the world. However we need to educate people about the new way of doing things. 
