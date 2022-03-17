@@ -1,0 +1,15 @@
+[project]
+name = "leos"
+requirements = []
+costs_version = 1
+[contracts.create_eval_earn]
+path = "contracts/create_eval_earn.clar"
+depends_on = ['edu-token']
+
+[contracts.edu-token]
+path = "contracts/edu-token.clar"
+depends_on = ['edu-token-trait']
+
+[contracts.edu-token-trait]
+path = "contracts/edu-token-trait.clar"
+depends_on = []
