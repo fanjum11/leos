@@ -4,3 +4,69 @@
 ::get_assets_maps
 (contract-call? .create_eval_earn test_init .edu-token u10 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")
 ::get_assets_maps
+(contract-call? .create_eval_earn purchase-edu-token .edu-token u100)
+(contract-call? .create_eval_earn test_init .edu-token u10 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")
+(contract-call? .create_eval_earn test_init .edu-token u10 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1" u8)
+(contract-call? .create_eval_earn purchase-edu-token .edu-token u100)
+(contract-call? .create_eval_earn test_init .edu-token u10 u8 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")
+(contract-call? .create_eval_earn answer_proof_by_test_taker u1 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+(contract-call? .create_eval_earn answer_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+::advance_chain_tip 10
+(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+::advance_chain_tip 15
+(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+::advance_chain_tip 85
+(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+(contract-call? .learn get_answers u1)
+(contract-call? .create_eval_earn get_answers u1) 
+(contract-call? .create_eval_earn get_correct_answers u1) 
+(contract-call? .create_eval_earn detailed_answers_by_test_takers u1 0x0a0b0c0d0a0b0c0d0a0b 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+(contract-call? .create_eval_earn detailed_answers_by_test_takers u1 0x0a0b0c0d0a0b0c0d0a0b 0x1234567890 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+(contract-call? .create_eval_earn detailed_answers_by_test_takers u1 0x0a0b0c0d0a0b0c0d0a0b 0x1234567899 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+(contract-call? .create_eval_earn did-I-win u1)
+(contract-call? get_final_list_of_winners u1)
+(contract-call? .create_eval_earn get_final_list_of_winners u1)
+::advance_chain_tip 1000
+(contract-call? .create_eval_earn get_final_list_of_winners u1)
+(contract-call? .create_eval_earn get_test_details u1) 
+(contract-call? .create_eval_earn get_max_test_id)
+(contract-call? .create_eval_earn get_my_award u1 u15 .edu-token) 
+(contract-call? .create_eval_earn get_my_award u1 u10 .edu-token) 
+(contract-call? .create_eval_earn purchase-edu-token .edu-token u100)
+(contract-call? .create_eval_earn test_init .edu-token u10 u8 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")
+(contract-call? .create_eval_earn answer_proof_by_test_taker u1 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+(contract-call? .create_eval_earn answer_proof_by_test_taker u1 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b)
+(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+::advance_chain_tip 100
+(contract-call? .create_eval_earn get_correct_answers u1) 
+(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+(contract-call? .create_eval_earn get_correct_answers u1) 
+(contract-call? .create_eval_earn detailed_answers_by_test_takers u1 0x0a0b0c0d0a0b0c0d0a0b 0x1234567890 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+(contract-call? .create_eval_earn did-I-win u1)
+(contract-call? .create_eval_earn get_final_list_of_winners u1)
+::advance_chain_tip 1000
+(contract-call? .create_eval_earn get_final_list_of_winners u1)
+(contract-call? .create_eval_earn get_test_details u1)
+(contract-call? .create_eval_earn get_max_test_id)
+(contract-call? .create_eval_earn get_my_award u1 u15 .edu-token) 
+(contract-call? .create_eval_earn purchase-edu-token .edu-token u100)
+(contract-call? .create_eval_earn test_init .edu-token u10 u8 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")
+(contract-call? .create_eval_earn answer_proof_by_test_taker u1 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+::advance_chain_tip 100
+(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+(contract-call? .create_eval_earn get_correct_answers u1) 
+(contract-call? .create_eval_earn detailed_answers_by_test_takers u1 0x0a0b0c0d0a0b0c0d0a0b 0x1234567890 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d)
+(contract-call? .create_eval_earn did-I-win u1)\n
+::advance_chain_tip 1000
+(contract-call? .create_eval_earn get_final_list_of_winners u1)
+(contract-call? .create_eval_earn get_my_award u1 u15 .edu-token) 
+::get_assets_maps
+(contract-call? pay-reminder-to-contract-owner u1 .edu-token)
+(contract-call? .create_eval_earn pay-reminder-to-contract-owner u1 .edu-token)
+(contract-call? .create_eval_earn pay-remainder-to-contract-owner u1 .edu-token)
+::advance_chain_tip 10000
+(contract-call? .create_eval_earn pay-remainder-to-contract-owner u1 .edu-token)
