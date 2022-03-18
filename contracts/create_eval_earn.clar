@@ -27,12 +27,10 @@
 ;; 1) have to check if number of answers equals number of questions in test_id
 ;; 2) creator has right proof 
 
-;; Owner
 (define-constant contract-owner tx-sender)
 (define-constant contract-owner-token-claim-interval u10000)
 (define-constant test-reward-claim-duration u1000)
 (define-constant stx-per-edu-token u1000) ;; mints 1 EDU token
-
 
 (define-data-var test-id-count uint u0)
 
@@ -42,7 +40,7 @@
             number_ques: uint,
             total_prize_money: uint,
             test_grade_starting_at_block: uint, 
-            test_grade_closed_at_block: uint, ;; rewards will be given for 10k blocks after this only
+            test_grade_closed_at_block: uint, 
             test_answers_hash: (buff 256),
             test_topic: (string-ascii 64),
             test_at_link: (string-ascii 128),
@@ -56,7 +54,6 @@
     }
 )
 
-;; was answer_detailed
 (define-map answer_list_by_creator {test_id: uint}
   {
       test_creator_id: principal,
@@ -76,14 +73,14 @@
 }
 )
 
-(define-public (purchase-edu-token (token-trait <edu-token-trait>) (edu-token-amount uint))
+(define-public (purchase_edu_token (token-trait <edu-token-trait>) (edu_token_amount uint))
     (let
         (
-            (required-stx (* stx-per-edu-token edu-token-amount))
+            (required_stx (* stx-per-edu-token edu_token_amount))
         )
-        (asserts! (>= (stx-get-balance tx-sender) required-stx) ERR_NOT_ENOUGH_STX_TO_MINT_TOKEN)
-        (try! (stx-transfer? required-stx tx-sender (as-contract tx-sender)))
-        (try! (contract-call? token-trait mint edu-token-amount tx-sender))
+        (asserts! (>= (stx-get-balance tx-sender) required_stx) ERR_NOT_ENOUGH_STX_TO_MINT_TOKEN)
+        (try! (stx-transfer? required_stx tx-sender (as-contract tx-sender)))
+        (try! (contract-call? token-trait mint edu_token_amount tx-sender))
         (ok true)
     )
 )
@@ -105,7 +102,7 @@
             (reward_claim_after_block (+ test_end_block test-reward-claim-duration))
 
         )
-        (try! (transfer-token-to-contract token-trait prize_amount))
+        (try! (transfer_token_to_contract token-trait prize_amount))
         (var-set test-id-count test_id) ;; no test_id of zero
         (map-set test_details {id: test_id} 
                     {
@@ -130,13 +127,13 @@
     )
 )
 
-(define-public (transfer-token-to-contract (token-trait <edu-token-trait>) (token-amount uint))
+(define-public (transfer_token_to_contract (token-trait <edu-token-trait>) (token_amount uint))
     (let
         (
-            (user-token (unwrap! (contract-call? token-trait get-balance tx-sender) ERR_TOKEN_CALL_FAIL))
+            (user_token (unwrap! (contract-call? token-trait get-balance tx-sender) ERR_TOKEN_CALL_FAIL))
         )
-        (asserts! (>= user-token token-amount) ERR_NOT_ENOUGH_TOKEN)
-        (try! (contract-call? token-trait transfer? token-amount tx-sender (as-contract tx-sender)))
+        (asserts! (>= user_token token_amount) ERR_NOT_ENOUGH_TOKEN)
+        (try! (contract-call? token-trait transfer? token_amount tx-sender (as-contract tx-sender)))
         (ok true)
     )
 )
@@ -290,7 +287,7 @@
     (
         (total_paid_so_far (unwrap! (get prize_amount_paid (map-get? test_payment_status {test_id: test_id})) ERR_PRIZE_PAID_UNAVAILABLE ))
         (award_money (unwrap! (get total_prize_money (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE ))
-        (stx-balance-in-contract (stx-get-balance (as-contract tx-sender)))
+        (stx_balance_in_contract (stx-get-balance (as-contract tx-sender)))
     )
 ;; have to check if test_reward claim is 10000 blocks in the past 
     (asserts! (>= block-height (+ contract-owner-token-claim-interval (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE ) ) ) ERR_TEST_REWARDS_STILL_OPEN)
@@ -298,8 +295,8 @@
 ;; then can claim what is left over on the prize - prize paid amount to contract creator
     (unwrap! (as-contract (contract-call? token-trait transfer? (- award_money total_paid_so_far) tx-sender contract-owner)) ERR_TOKEN_TRANSFER_FAIL )
 ;; can also transfer stacks to the contract creator then 
-    (asserts! (> stx-balance-in-contract u0) ERR_NOT_ENOUGH_STX_TO_TRANSFER)
-    (try! (stx-transfer? stx-balance-in-contract (as-contract tx-sender) contract-owner ) )
+    (asserts! (> stx_balance_in_contract u0) ERR_NOT_ENOUGH_STX_TO_TRANSFER)
+    (try! (stx-transfer? stx_balance_in_contract (as-contract tx-sender) contract-owner ) )
     (ok true)
 )
 )
