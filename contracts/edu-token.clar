@@ -1,7 +1,7 @@
 
 (impl-trait .edu-token-trait.edu-token-trait)
 
-(define-constant ERR_NOT_TOKEN_OWNER (err u2000))
+(define-constant ERR_NOT_TOKEN_OWNER (err u100))
 
 (define-fungible-token edu-token)
 

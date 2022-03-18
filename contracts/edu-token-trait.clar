@@ -7,3 +7,4 @@
     (burn (uint) (response bool uint))
   )
 )
+
