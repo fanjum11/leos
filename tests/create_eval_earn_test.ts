@@ -28,7 +28,7 @@ Clarinet.test({
   });
 
 Clarinet.test({
-    name: "Ensure that the any creator can create a test by paying edu tokens",
+    name: "Ensure that the any creator can create multiple tests by paying edu tokens",
     async fn(chain: Chain, accounts: Map<string, Account>) {
         var notContractOwner = accounts.get("wallet_1")!;
         var deployer = accounts.get("deployer")!;
@@ -52,18 +52,108 @@ Clarinet.test({
                     types.uint(15),
                     types.uint(100),
                     '0xabcd',
-                    types.utf8("abcdefgh"),
-                    types.utf8("acbdacbd")
+                    types.ascii('abcdefgh'),
+                    types.ascii("acbdacbd")
+                ],
+                deployer.address
+            ),
+            Tx.contractCall(
+                "create_eval_earn",
+                "test_init",
+                [
+                    types.principal(tokenTrait),
+                    types.uint(10),
+                    types.uint(8),
+                    types.uint(15),
+                    types.uint(100),
+                    '0xabcd',
+                    types.ascii('abcdefgh'),
+                    types.ascii("acbdacbd")
                 ],
                 deployer.address
             ),
                 ]);
-        assertEquals(block.receipts.length, 1);
+        assertEquals(block.receipts.length, 3);
         assertEquals(block.height, 2);
         block.receipts[0].result.expectOk().expectBool(true);
-        //block.receipts[1].result.expectOk().expectUint(1);
+        block.receipts[1].result.expectOk().expectUint(1);
+        block.receipts[2].result.expectOk().expectUint(2);
+    },
+});
+
+Clarinet.test({
+    name: "Ensure that the number of tokens that can be purchased is limited by num of STX",
+    async fn(chain: Chain, accounts: Map<string, Account>) {
+      var deployer = accounts.get("deployer")!;
+      var member = accounts.get("deployer")!;
+      var organisation = accounts.get("wallet_2")!;
+      var tokenTrait = `${deployer.address}.edu-token`;
+  
+      let block = chain.mineBlock([
+        Tx.contractCall(
+          "create_eval_earn",
+          "purchase_edu_token",
+          [types.principal(tokenTrait), types.uint(100000000000000)],
+          deployer.address
+        ),
+      ]);
+  
+      block.receipts[0].result.expectErr().expectUint(1012);
+      assertEquals("(err u1012)", block.receipts[0].result);
+    },
+  });
+
+
+  Clarinet.test({
+    name: "Ensure that the any creator can create multiple tests by paying edu tokens",
+    async fn(chain: Chain, accounts: Map<string, Account>) {
+        var notContractOwner = accounts.get("wallet_1")!;
+        var deployer = accounts.get("deployer")!;
+        var member = accounts.get("deployer")!;
+        var tokenTrait = `${deployer.address}.edu-token`;
+
+        let block = chain.mineBlock([
+            Tx.contractCall(
+                "create_eval_earn",
+                "test_init",
+                [
+                    types.principal(tokenTrait),
+                    types.uint(10),
+                    types.uint(8),
+                    types.uint(15),
+                    types.uint(100),
+                    '0xabcd',
+                    types.ascii('abcdefgh'),
+                    types.ascii("acbdacbd")
+                ],
+                deployer.address
+            ),
+            Tx.contractCall(
+                "create_eval_earn",
+                "test_init",
+                [
+                    types.principal(tokenTrait),
+                    types.uint(10),
+                    types.uint(8),
+                    types.uint(15),
+                    types.uint(100),
+                    '0xabcd',
+                    types.ascii('abcdefgh'),
+                    types.ascii("acbdacbd")
+                ],
+                deployer.address
+            ),
+                ]);
+
+        assertEquals(block.receipts.length, 3);
+        assertEquals(block.height, 2);
+        block.receipts[0].result.expectOk().expectBool(true);
+        block.receipts[1].result.expectOk().expectUint(1);
+        block.receipts[2].result.expectOk().expectUint(2);
     },
 });
 
 
 
+
+//       var owner = accounts.get("wallet_1")!;
