@@ -19,7 +19,10 @@
 (define-constant ERR_TEST_DETAILS_UNAVAILABLE (err u1015))
 (define-constant ERR_WINNER_LIST_UNAVAILABLE (err u1016))
 (define-constant ERR_TOKEN_TRANSFER_FAIL (err u1017))
-
+(define-constant ERR_NO_CREATOR_ANSWER_LIST (err u1018))
+(define-constant ERR_NO_TEST_TAKER_ANSWER_HASH (err u1019))
+(define-constant ERR_NO_WINNER_LIST (err u1020))
+(define-constant ERR_NOT_CONTRACT_OWNER (err u1021))
 
 
 
@@ -127,7 +130,7 @@
     )
 )
 
-(define-public (transfer_token_to_contract (token-trait <edu-token-trait>) (token_amount uint))
+(define-private (transfer_token_to_contract (token-trait <edu-token-trait>) (token_amount uint))
     (let
         (
             (user_token (unwrap! (contract-call? token-trait get-balance tx-sender) ERR_TOKEN_CALL_FAIL))
@@ -169,7 +172,7 @@
 (define-read-only (get_correct_answers (test_id uint) )
  ( begin
   (asserts! (>= block-height (unwrap! (get test_grade_starting_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_LOCKED)
-  (ok (unwrap! (get answer_list (map-get? answer_list_by_creator {test_id: test_id})) (err u1002)))
+  (ok (unwrap! (get answer_list (map-get? answer_list_by_creator {test_id: test_id})) ERR_NO_CREATOR_ANSWER_LIST ))
  )
 )
 
@@ -181,7 +184,7 @@
     (
         (user_answer_pre_hash (concat given_answers secret))
         (proof_matches (is-eq user_answer_hash (sha256 user_answer_pre_hash)) )
-        (list_of_correct_answers (unwrap! (get answer_list (map-get? answer_list_by_creator {test_id: test_id})) (err u101)) )
+        (list_of_correct_answers (unwrap! (get answer_list (map-get? answer_list_by_creator {test_id: test_id})) ERR_NO_CREATOR_ANSWER_LIST ) )
         (points_scored (fold + (map verify_answer list_of_correct_answers given_answers) u0))
         (points_to_win (unwrap! (get min_correct_answers_reqd (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE ))
     )
@@ -194,11 +197,12 @@
     ;; but block height should be less than reward time - ux inconvenience though
     (asserts! (<= block-height (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_LOCKED)
     ;; to check if the tx-sender is the one who set the proof and verify proof submitted earlier 
-    (asserts! (is-eq user_answer_hash (unwrap! (get answer_hash (map-get? test_taker_ans_hash {test_id: test_id, test_taker_id: tx-sender})) (err u101))  ) ERR_TEST_LOCKED)
+    (asserts! (is-eq user_answer_hash (unwrap! (get answer_hash (map-get? test_taker_ans_hash {test_id: test_id, test_taker_id: tx-sender})) ERR_NO_TEST_TAKER_ANSWER_HASH )  ) ERR_TEST_LOCKED)
 
     ;; and if answers correct then store the tx-sender info in successful list
     (if (> points_scored points_to_win)
-    (map-set test_award_winner_list {test_id: test_id} {test_winner_list: (unwrap-panic (as-max-len? (append (get-test-winners test_id) tx-sender) u100))})
+    ;;(map-set test_award_winner_list {test_id: test_id} {test_winner_list: (unwrap-panic (as-max-len? (append (get-test-winners test_id) tx-sender) u100))})
+    (map-set test_award_winner_list {test_id: test_id} {test_winner_list: (unwrap! (as-max-len? (append (get-test-winners test_id) tx-sender) u100) ERR_NO_WINNER_LIST )})
     false    
     )
     (ok true)
@@ -214,7 +218,7 @@
     (if (is-eq correct_answers given_answers) u1 u0)
 )
 
-(define-read-only (did-I-win (test_id uint)) ;; need to check if tx-sender is in winning list 
+(define-read-only (did_I_win (test_id uint)) ;; need to check if tx-sender is in winning list 
 (let
     (
         (test_winners (unwrap! (get test_winner_list (map-get? test_award_winner_list {test_id: test_id})) ERR_WINNER_LIST_UNAVAILABLE )) 
@@ -289,6 +293,8 @@
         (award_money (unwrap! (get total_prize_money (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE ))
         (stx_balance_in_contract (stx-get-balance (as-contract tx-sender)))
     )
+;; we dont have to but we let only the contract owner call this
+    (asserts! (is-eq contract-owner tx-sender) ERR_NOT_CONTRACT_OWNER)
 ;; have to check if test_reward claim is 10000 blocks in the past 
     (asserts! (>= block-height (+ contract-owner-token-claim-interval (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE ) ) ) ERR_TEST_REWARDS_STILL_OPEN)
     (asserts! (> award_money total_paid_so_far) ERR_NO_REMAINDER_TOKENS)
@@ -296,7 +302,8 @@
     (unwrap! (as-contract (contract-call? token-trait transfer? (- award_money total_paid_so_far) tx-sender contract-owner)) ERR_TOKEN_TRANSFER_FAIL )
 ;; can also transfer stacks to the contract creator then 
     (asserts! (> stx_balance_in_contract u0) ERR_NOT_ENOUGH_STX_TO_TRANSFER)
-    (try! (stx-transfer? stx_balance_in_contract (as-contract tx-sender) contract-owner ) )
+;;    (try! (stx-transfer? stx_balance_in_contract (as-contract tx-sender) contract-owner ) )
+    (try! (as-contract (stx-transfer? stx_balance_in_contract tx-sender contract-owner )) )
     (ok true)
 )
 )
