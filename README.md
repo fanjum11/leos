@@ -93,4 +93,5 @@ In the future probably the wallet of the individual could get the test questions
 
 ## RECOMMENDED FLOW 
 
+![image](https://user-images.githubusercontent.com/4590487/159304400-6fd301e8-7759-4f00-907e-7615691c0b26.png)
 
