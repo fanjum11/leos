@@ -1,5 +1,6 @@
-
-;;
+;; WE ASSUME TEST CREATOR WILL NOT MISBEHAVE AND TEST CREATORS ARE RATIONAL ACTORS
+;; IN FUTURE WE CAN DEVELOP A BLACKLISTING MECHANISM FOR THE CREATORS THAT MISBEHAVE
+;; 
 (use-trait edu-token-trait .edu-token-trait.edu-token-trait)
 
 (define-constant ERR_NOT_TEST_CREATOR (err u1001))
@@ -9,7 +10,7 @@
 (define-constant ERR_NOT_REWARD_AMOUNT (err u1005))
 (define-constant ERR_NOT_ENOUGH_TOKEN (err u1006))
 (define-constant ERR_TOKEN_CALL_FAIL (err u1007))
-(define-constant ERR_TEST_REWARDS_STILL_OPEN (err u1008))
+(define-constant ERR_TEST_GRADE_OPEN (err u1008))
 (define-constant ERR_PRIZE_MONEY_UNAVAILABLE (err u1009))
 (define-constant ERR_PRIZE_PAID_UNAVAILABLE (err u1010))
 (define-constant ERR_NO_REMAINDER_TOKENS (err u1011))
@@ -21,14 +22,11 @@
 (define-constant ERR_TOKEN_TRANSFER_FAIL (err u1017))
 (define-constant ERR_NO_CREATOR_ANSWER_LIST (err u1018))
 (define-constant ERR_NO_TEST_TAKER_ANSWER_HASH (err u1019))
-(define-constant ERR_NO_WINNER_LIST (err u1020))
+(define-constant ERR_TEST_REWARDS_STILL_OPEN (err u1020))
 (define-constant ERR_NOT_CONTRACT_OWNER (err u1021))
-
-
-
-;; TO DO
-;; 1) have to check if number of answers equals number of questions in test_id
-;; 2) creator has right proof 
+(define-constant ERR_TEST_GRADE_CLOSED (err u1022))
+(define-constant ERR_USER_HASH_MISMATCH (err u1023))
+(define-constant ERR_NUM_ANSWERS_MISMATCH (err u1024))
 
 (define-constant contract-owner tx-sender)
 (define-constant contract-owner-token-claim-interval u10000)
@@ -168,10 +166,10 @@
  )
 )
 
-;; CHECK FOR BLOCK HEIGHT AND > >= ???
+
 (define-read-only (get_correct_answers (test_id uint) )
  ( begin
-  (asserts! (>= block-height (unwrap! (get test_grade_starting_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_LOCKED)
+  (asserts! (>= block-height (unwrap! (get test_grade_starting_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_OPEN)
   (ok (unwrap! (get answer_list (map-get? answer_list_by_creator {test_id: test_id})) ERR_NO_CREATOR_ANSWER_LIST ))
  )
 )
@@ -191,18 +189,20 @@
     ;; HAVE TO ENSURE THAT THE PROOF ENTERED EARLIER MATCHES THE PROOF GIVEN NOW
     ;;(map-set test_taker_ans_hash {test_id: test_id, test_taker_id: tx-sender} {answer_hash: hash_of_answers } )
     (asserts! proof_matches ERR_PROOF_INCORRECT)
+    ;; number of answers by creator and test taker have to be same
+    (asserts! (is-eq (len list_of_correct_answers) (len given_answers)) ERR_NUM_ANSWERS_MISMATCH )
 
     ;; so test is locked since block height is greater 
-    (asserts! (>= block-height (unwrap! (get test_grade_starting_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_LOCKED)
+    (asserts! (>= block-height (unwrap! (get test_grade_starting_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_OPEN)
     ;; but block height should be less than reward time - ux inconvenience though
-    (asserts! (<= block-height (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_LOCKED)
+    (asserts! (< block-height (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_GRADE_CLOSED)
     ;; to check if the tx-sender is the one who set the proof and verify proof submitted earlier 
-    (asserts! (is-eq user_answer_hash (unwrap! (get answer_hash (map-get? test_taker_ans_hash {test_id: test_id, test_taker_id: tx-sender})) ERR_NO_TEST_TAKER_ANSWER_HASH )  ) ERR_TEST_LOCKED)
+    (asserts! (is-eq user_answer_hash (unwrap! (get answer_hash (map-get? test_taker_ans_hash {test_id: test_id, test_taker_id: tx-sender})) ERR_NO_TEST_TAKER_ANSWER_HASH )  ) ERR_USER_HASH_MISMATCH)
 
     ;; and if answers correct then store the tx-sender info in successful list
     (if (> points_scored points_to_win)
     ;;(map-set test_award_winner_list {test_id: test_id} {test_winner_list: (unwrap-panic (as-max-len? (append (get-test-winners test_id) tx-sender) u100))})
-    (map-set test_award_winner_list {test_id: test_id} {test_winner_list: (unwrap! (as-max-len? (append (get-test-winners test_id) tx-sender) u100) ERR_NO_WINNER_LIST )})
+    (map-set test_award_winner_list {test_id: test_id} {test_winner_list: (unwrap! (as-max-len? (append (get-test-winners test_id) tx-sender) u100) ERR_WINNER_LIST_UNAVAILABLE )})
     false    
     )
     (ok true)
@@ -235,7 +235,7 @@
        (test_winners (unwrap! (get test_winner_list (map-get? test_award_winner_list {test_id: test_id})) ERR_WINNER_LIST_UNAVAILABLE )) 
     )
     ;; have to check if block time is more than reward close time
-    (asserts! (>= block-height (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_REWARDS_STILL_OPEN)
+    (asserts! (>= block-height (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_GRADE_OPEN)
 
     (ok test_winners)
 )
@@ -253,7 +253,7 @@
        (total_paid_so_far (unwrap! (get prize_amount_paid (map-get? test_payment_status {test_id: test_id})) ERR_PRIZE_PAID_UNAVAILABLE ))
     )
     ;; have to check if block time is more than reward close time
-    (asserts! (>= block-height (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_REWARDS_STILL_OPEN)
+    (asserts! (>= block-height (unwrap! (get test_grade_closed_at_block (map-get? test_details {id: test_id})) ERR_TEST_DETAILS_UNAVAILABLE )  ) ERR_TEST_GRADE_OPEN)
     ;; have to check if the tx-sender is a winner 
     (asserts! (is-some (index-of test_winners tx-sender) ) ERR_NOT_WINNER)
     ;; then have to check if my_award_tokens is the right amount 

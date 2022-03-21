@@ -1,5 +1,4 @@
 #V2
-(contract-call? .learn purchase-edu-token .edu-token u100)
 (contract-call? .create_eval_earn purchase-edu-token .edu-token u100)
 ::get_assets_maps
 (contract-call? .create_eval_earn test_init .edu-token u10 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")
@@ -97,3 +96,6 @@ sha256(0x0a0b0c0d0a0b0c0d0a0babcdefghij)
 (sha256 0x0a0b0c0d0a0b0c0d0d0d11223344556677889900 )
 (sha256 0x0a0a0a0a0a0a0a0a0a0a 11223344556677889900)
 (sha256 0x0a0a0a0a0a0a0a0a0a0a11223344556677889900)
+(sha256 '0x0a0b0c0d0a0b0c0d0a0b0c0d0a0b' '0x11223344556677889900')
+(sha256 0x0a0b0c0d0a0b0c0d0a0b0c0d0a0b 0x11223344556677889900)
+(sha256 0x0a0b0c0d0a0b0c0d0a0b0c0d0a0b11223344556677889900)
