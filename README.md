@@ -37,7 +37,7 @@ There are three actors in the LEOS ecosystem
 
 1. Contract (Platform) creator. We expect this to be a DAO in the long run - A DAO to enable efficient propagation of knowledge where everyone contributing to the knowledge propagation (creators, curators, explainers) is rewarded.  And the learners and product owners pay for the services of this DAO in the future. In this version though the learners are rewarded for demonstrating proof of knowledge.
 2. Company or Product owners - these are other web2 and web3 companies (DAOs maybe) that would like to spread knowledge about their product to the people and reward people who show proof of knowledge. We assume these are rational actors.
-3. Individuals - These are people who are curious to learn more about any topic. They are rewarded with tokens on providing proof of knowledge. In this version, individuals are paid im tokens on providing proof of knowledge. In a future version we will have options for individuals to pay to obtain knowledge. 
+3. Individuals - These are people who are curious to learn more about any topic. They are rewarded with tokens on providing proof of knowledge. In this version, individuals are paid in tokens on providing proof of knowledge. In a future version we will have options for individuals to pay to obtain knowledge. 
 
 In the current version proof of knowledge is simple - a webpage with explanations and multiple choice questions related to a topic.  Companies set up the web page with description and answers (THIS IS NOT COVERED IN THE CODE HERE). Individuals can log in, provide answers and then be rewarded if they satisfy the winning criteria. 
 
@@ -50,11 +50,11 @@ We next provide details about how each of these actors can leverage the LEOS pla
 ### CONTRACT CREATOR
 The contract creator (to be a DAO in the future) will deploy the smart contract. 
 
-The contract creator will also transfer the unclaimed tokens of every test and the STX paid for the tokens to the contract creators wallet periodically.  The unclaimed tokens will be claimed after a predetermined interval of 10,000 blocks.
+The contract creator will also transfer the unclaimed tokens of every test and the STX paid for the tokens to the contract creators wallet periodically.  The unclaimed tokens can be claimed long after all the test winners are allowed to claim their rewards.  Currently this is a predetermined interval of 10,000 blocks after any test rewards can be claimed by the test winners .
 
-### AS A COMPANY THAT WANTS TO REWARD PEOPLE FOR LEARNING
+### AN ENTITY THAT WANTS TO REWARD PEOPLE FOR LEARNING
 
-The company is expected to create learning materials as well as tests based on the learning materials. These will be available on a web page for now and on IPFS in the future. We call this as the test creator. 
+The entity (company, organization, DAO, individual etc) is expected to create learning materials as well as tests based on the learning materials. These will be available on a web page for now and on IPFS in the future. We call this entity as the test creator. 
 
 The test creator creates the test by purchasing EDU tokens in lieu of STX. STX is paid to the contract. 
 
@@ -66,9 +66,9 @@ There are three intervals related to a test namely as shown in the lifecycle of 
 - test grading interval : this is the number of stacks blocks during which the creator provides their answers and then each individual verifies the answers.  Answers from individuals are matched to answer key provided by the creator and winners decided. The threshold to be declared a winner in a test is decided by the test creator.  The test creator also decides the prize money for the test. The prize money will be shared amongst the winners. 
 - test reward claim interval: this is the interval during which the winners can claim their prizes by invoking the right functions on the smart contract. The winners cannot claim their reward once this interval ends. 
 
-The contract creator can get the tokens that are left over after the token prize is paid out. The left over could be because some winners did not claim the rewards or because the prize money had a remainder after being distributed to all the winners.  I
+The contract creator can get the tokens that are left over after the token prize is paid out. The left over could be because some winners did not claim the rewards or because the prize money had a remainder after being distributed to all the winners.  
 
-We next explain the steps that a test creator has to follow briefly.  Detailed explanations follow this brief description. The focus here is just on the smart contract and not on the front end. 
+We next explain the steps that a test creator has to follow briefly.  Detailed explanations follow this brief description. To repeat what was stated earlier, the focus here is just on the smart contract and not on the front end. 
 
 A test creator has to
 
@@ -79,9 +79,11 @@ A test creator has to
 #### DETAILS
 
 FIRST STEP
+
 Purchase EDU tokens 
 
 SECOND STEP 
+
 The company will then provide details of the tests to be captured on the blockchain. The information to be provided is 
 
 - Number of questions on the test
@@ -114,7 +116,7 @@ The steps to be followed by the web application (Webapp) used by the individual 
 7. The individual via the webapp gets a list of winners on the test and the prize money on the test once the test grading interval ends. 
 8. The individual then claims his/her reward if a winner with the right amount of prize money using his wallet via the webapp. 
 
-In the future probably the wallet of the individual could get the test questions and learning material, display these to the user, get the user's answers, store the test answers and transmit the answer hash when the test is open. Later the wallet can transmit the detailed answers to the LEOS smart contract once the test is locked. The wallet can then also claim the rewards.  In this manner the individual will not need to trust any third party deploying the web app.  Of course, for now, one can argue that multiple parties can deploy their instance of the web app. Hence a web app that is not acting rationally will not have people using it.
+In the future probably the wallet of the individual in combination with the web browser could get the test questions and learning material, display these to the user, get the user's answers, store the test answers in the wallet securely and transmit the answer hash when the test is open. Later the wallet can transmit the detailed answers to the LEOS smart contract once the test is locked. The wallet can then also claim the rewards.  In this manner the individual will not need to trust any third party deploying the web app.  
 
 ## HOW TO TEST THIS ON YOUR MACHINE ##
 
