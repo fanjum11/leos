@@ -1,5 +1,4 @@
 # Learn to earn on Stacks - LEOS
-Learn to earn leveraging Stacks 
 
 Web3 based on blockchain technology is going to revolutionize the world. However we need to educate people about the new way of doing things. These people can be future customers who will use the web3 platform or they can be future participants who help advance the concepts. Learn to earn is an approach that we believe will help in the rapid spread of education.
 
