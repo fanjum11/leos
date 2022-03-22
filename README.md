@@ -8,9 +8,9 @@ An approach where everyone involved in spreading knowledge can be compensated wi
 
 **In order to bootstrap this new learning approach, we use the Learn to Earn technique.** In this case, the learners are provided rewards on demonstrating proof of learning. 
 
-There have been some efforts towards creating Learn to Earn systems. For example, Coinbase app has the feature whereby you can learn about a token or a web3 company. After that you are asked some questions related to what you learnt and if you provide the right answers you are rewarded some tokens.
+There have been some efforts towards creating Learn to Earn systems. For example, Coinbase app has the feature whereby you can learn about a token or a web3 company. After that you are asked some questions related to what you learnt and if you provide the right answers you are rewarded some tokens.However, this approach is a centralized approach. Coinbase controls all aspects of this learn to earn journey.  
 
-However, this approach is a centralized approach. Coinbase controls all aspects of this learn to earn journey.  In this project we consider a decentralized approach to learn to earn based on the Stacks platform - a platform that provides for smart contracts on Bitcoin. We use STX as well as a separate EDU token for this system. In the future, we expect this to migrate to a separate Appchain on the Stacks platform.
+In this project we consider a decentralized approach to learn to earn based on the Stacks platform - a platform that provides for smart contracts on Bitcoin. We use STX as well as a separate EDU token for this system. In the future, we expect this to migrate to a separate Appchain on the Stacks platform.
 
 
 ## WHAT IS LEOS
