@@ -1,17 +1,23 @@
 # Learn to earn on Stacks - LEOS
 
-Web3 based on blockchain technology is going to revolutionize the world. However we need to educate people about the new way of doing things. These people can be future customers who will use the web3 platform or they can be future participants who help advance the concepts. Learn to earn is an approach that we believe will help in the rapid spread of education.
+Humans have been learning since times immemorial. And there have been many different methods of teaching.
 
-There have been some efforts towards this. For example, Coinbase app has the feature whereby you can learn about a token or a web3 company. After that you are asked some questions related to what you learnt and if you provide the right answers you are rewarded some tokens.
+Web3 based on blockchain technology provides a decentralized approach towards teaching. This I believe will be another effective approach for spreading knowledge on any topic efficiently. An approach where everyone involved in spreading knowledge can be compensated without having to depend on trusted third parties.
 
-However, this approach is a centralized approach. Coinbase controls all aspects of this learn to earn journey.  In this project we consider a decentralized approach to learn to earn based on the Stacks platform - a platform that provides for smart contracts on Bitcoin.
+This approach towards teaching can be used to educate people about any topic - old traditional topics or new web3 related topics.  And the learners can be future customers who will use the web3 platform or they can be future participants who help advance the concepts. 
+
+In order to bootstrap this new learning approach, we use the Learn to Earn technique. In this case, the learners are provided rewards on demonstrating proof of learning. 
+
+There have been some efforts towards creating Learn to Earn systems. For example, Coinbase app has the feature whereby you can learn about a token or a web3 company. After that you are asked some questions related to what you learnt and if you provide the right answers you are rewarded some tokens.
+
+However, this approach is a centralized approach. Coinbase controls all aspects of this learn to earn journey.  In this project we consider a decentralized approach to learn to earn based on the Stacks platform - a platform that provides for smart contracts on Bitcoin. We use STX as well as a separate EDU token for this system. In the future, we expect this to migrate to a separate Appchain on the Stacks platform.
 
 
 ## WHAT IS LEOS
 
 LEOS is a **decentralized learning platform leveraging Stacks**. The LEOS platform has its own token called the EDU token. The platform will enable companies to create learning material and to provide EDU tokens as rewards for those who provide proof of learning. In addition, we expect this platform to be used by various teams structured as DAOs as they seek to reward the creators and curators of knowledge while the learners will pay for the learnings.
 
-In this version, LEOs is build on Stacks directly using a EDU-token. In the future I expect LEOS to have it's own Appchain that settles on the Stacks chain.
+In this version, LEOs is built on Stacks directly using a EDU-token. In the future I expect LEOS to have it's own Appchain that settles on the Stacks chain.
 
 In addition, in this version we have made an assumption that we can trust the test creators. We intend to relax this assumption in future versions of this project.
 
