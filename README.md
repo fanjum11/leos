@@ -11,7 +11,9 @@ However, this approach is a centralized approach. Coinbase controls all aspects 
 
 LEOS is a decentralized learning platform leveraging Stacks - the LEOS platform. The platform will enable companies to create learning material and to provide tokens as rewards for those who provide proof of learning. In addition, we expect this platform to be used by various teams structured as DAOs as they seek to reward the creators and curators of knowledge while the learners will pay for the learnings.
 
-In this version, LEOs is build on Stacks directly using a LEO-token. In the future I expect LEOS to have it's own Appchain and its own token that settles on the Stacks chain. 
+In this version, LEOs is build on Stacks directly using a LEO-token. In the future I expect LEOS to have it's own Appchain and its own token that settles on the Stacks chain.
+
+In addition, in this version we have made an assumption that we can trust the test creators. We intend to relax this assumption in future versions of this project.
 
 ## WHY BLOCKCHAIN FOR LEOS
 
@@ -21,39 +23,47 @@ Learn and Earn systems in the web2 world require trust in the central entity tha
 
 There are three actors in the LEOS ecosystem 
 
-1. Contract creator. We expect this to be a DAO in the long run - A DAO to enable efficient propagation of knowledge where everyone contributing to the knowledge propagation (creators, curators) is rewarded.  And the learners and product owners pay for the services of this DAO.
-2. Company or Product owners - these are other web2 and web3 companies (DAOs maybe) that would like to spread knowledge about their product to the people and reward people who show proof of knowledge.
-3. Individuals - These are people who are curious to learn more about web3 and activities in this space. They are rewarded with tokens on providing proof of knowledge. 
+1. Contract (Platform) creator. We expect this to be a DAO in the long run - A DAO to enable efficient propagation of knowledge where everyone contributing to the knowledge propagation (creators, curators) is rewarded.  And the learners and product owners pay for the services of this DAO.
+2. Company or Product owners - these are other web2 and web3 companies (DAOs maybe) that would like to spread knowledge about their product to the people and reward people who show proof of knowledge. We assume these are rational actors.
+3. Individuals - These are people who are curious to learn more about web3 as well as services and products in this space. They are rewarded with tokens on providing proof of knowledge. In this version, individuals are paid im tokens on providing proof of knowledge. In a future version we will have options for individuals to pay to obtain knowledge. 
 
 In the current version proof of knowledge is simple - a webpage with explanations and multiple choice questions related to a topic. 
 Companies set up the web page with description and answers (THIS IS NOT COVERED IN THE CODE HERE). Individuals can log in, provide answers and then be rewarded if they satisfy the winning criteria. 
 
 We next provide details about how each of these actors can leverage the LEOS platform. 
 
-** We do not focus on the front end. The focus is just on the smart contracts needed for a simple LEOS platform **
+**We do not focus on the front end. The focus is just on the smart contracts needed for a simple LEOS platform**
+**We also assume the test creators are trusted in this version and only consider multiple choice tests for now.**
 
 
 ### CONTRACT CREATOR
 The contract creator (to be a DAO in the future) will deploy the smart contract. 
 
-The contract creator will also transfer the unclaimed tokens of every test and the STX paid for the tokens to the contract creators wallet periodically.  The unclaimed tokens will be claimed after a predetermined interval of 10000 blocks.
+The contract creator will also transfer the unclaimed tokens of every test and the STX paid for the tokens to the contract creators wallet periodically.  The unclaimed tokens will be claimed after a predetermined interval of 10,000 blocks.
 
 ### AS A COMPANY THAT WANTS TO REWARD PEOPLE FOR LEARNING
 
-The company is expected to create learning materials as well as tests based on the learning materials. These will be available on a web page for now and on IPFS in the future. 
+The company is expected to create learning materials as well as tests based on the learning materials. These will be available on a web page for now and on IPFS in the future. We call this as the test creator. 
 
-There are three intervals related to a test namely
-- test open interval : this is the number of stacks blocks during which anyone can answer the test questions. Individuals provide a hash of (their answers + secret) during this phase in order to prevent others from seeing their answers on the blockchain.
-- test winner decision interval : this is the number of stacks blocks during which first the creator exposes their answers and then each individual provides their answers.  Answers from individuals are matched to answer key provided by the creator and winners decided. The prize money will be shared amongst the winners. 
-- test reward claim interval: this is the interval during which the winners can claim their prizes by invoking the right functions on the smart contract. 
+The test creator creates the test by purchasing EDU tokens in lieu of STX. STX is paid to the contract. 
 
-Finally the contract creator can get the tokens that are left over after the prize money is paid out. The left over could be because some winners did not claim the rewards or because the prize money had a remainder after being distributed to all the winners.
+There are three intervals related to a test namely as shown in the lifecycle of the test below
 
-We next explain the steps that a company has to follow briefly.  Detailed explanations follow this brief description. The focus here is not on the front end. Rather the focus is just on the smart contracts. 
+![image](https://user-images.githubusercontent.com/4590487/159304400-6fd301e8-7759-4f00-907e-7615691c0b26.png)
+
+- test open interval : this is the number of stacks blocks during which anyone can answer the test questions. Individuals provide a hash of (their answers + secret) during this phase in order to prevent others from seeing their answers on the blockchain. The length of this interval is decided by the creator of the test.
+- test grading interval : this is the number of stacks blocks during which the creator provides their answers and then each individual verifies the answers.  Answers from individuals are matched to answer key provided by the creator and winners decided. The threshold to be declared a winner in a test is decided by the test creator.  The test creator also decides the prize money for the test. The prize money will be shared amongst the winners. 
+- test reward claim interval: this is the interval during which the winners can claim their prizes by invoking the right functions on the smart contract. The winners cannot claim their reward once this interval ends. 
+
+The contract creator can get the tokens that are left over after the token prize is paid out. The left over could be because some winners did not claim the rewards or because the prize money had a remainder after being distributed to all the winners.  I
+
+We next explain the steps that a test creator has to follow briefly.  Detailed explanations follow this brief description. The focus here is just on the smart contract and not on the front end. 
+
+A test creator has to
 
 1. Use stacks to purchase the LEOS tokens.
 2. Use the LEOS tokens and provide test details that go the blockchain.
-3. Provide the test answers (only multiple choice answers in this version) once the test is locked. The test answers are not accepted until the test is locked. 
+3. Provide the test answers (only multiple choice answers in this version) once the test is locked. The test answers by the test creator are not accepted until the test is locked. 
 
 #### DETAILS
 
