@@ -15,26 +15,31 @@ However, this approach is a centralized approach. Coinbase controls all aspects 
 
 ## WHAT IS LEOS
 
-LEOS is a **decentralized learning platform leveraging Stacks**. The LEOS platform has its own token called the EDU token. The platform will enable companies to create learning material and to provide EDU tokens as rewards for those who provide proof of learning. In addition, we expect this platform to be used by various teams structured as DAOs as they seek to reward the creators and curators of knowledge while the learners will pay for the learnings.
+LEOS is a **decentralized learning platform leveraging Stacks**.  
+
+The platform in the first version will be a learn to earn system. This system will enable companies to create learning material and to provide EDU tokens as rewards for those who provide proof of learning. The learning material will involve tests.  Anyone can provide answers to the tests as proof of learning. Thus, the test creators create tests that the test takers provide answers for.  A test taker is declared to be a winner if the number of correct answers they provide is above a threshold.  The prize money of the test is then shared amongst all the winners. 
 
 In this version, LEOs is built on Stacks directly using a EDU-token. In the future I expect LEOS to have it's own Appchain that settles on the Stacks chain.
 
 In addition, in this version we have made an assumption that we can trust the test creators. We intend to relax this assumption in future versions of this project.
 
+In future, we expect this platform to be used by various teams structured as DAOs as they seek to reward the creators and curators of knowledge while the learners will pay for the learnings.
+
 ## WHY BLOCKCHAIN FOR LEOS
 
-Learn and Earn systems in the web2 world require trust in the central entity that controls the platform. But such central entities can misuse the power that they have.  We need to build learn and earn systems where the system can function without requiring any dependency on a trusted third party. 
+The learning systems currently being used and specifically the Learn and Earn systems in the web2 world require trust in the central entity that controls the platform. But such central entities can misuse the power that they have.  We need to build learn and earn systems where the system can function without requiring any dependency on a trusted third party. 
+
+And make it seamless to reward the entities that help in spreading knowledge efficiently without having to depend on trusted parties.  So we seek to reward the creators of knowledge, the curators of knowledged as well as the explainers who use their time to spread knowledge among their circle.
 
 ## HOW TO USE LEOS
 
 There are three actors in the LEOS ecosystem 
 
-1. Contract (Platform) creator. We expect this to be a DAO in the long run - A DAO to enable efficient propagation of knowledge where everyone contributing to the knowledge propagation (creators, curators) is rewarded.  And the learners and product owners pay for the services of this DAO.
+1. Contract (Platform) creator. We expect this to be a DAO in the long run - A DAO to enable efficient propagation of knowledge where everyone contributing to the knowledge propagation (creators, curators, explainers) is rewarded.  And the learners and product owners pay for the services of this DAO in the future. In this version though the learners are rewarded for demonstrating proof of knowledge.
 2. Company or Product owners - these are other web2 and web3 companies (DAOs maybe) that would like to spread knowledge about their product to the people and reward people who show proof of knowledge. We assume these are rational actors.
-3. Individuals - These are people who are curious to learn more about web3 as well as services and products in this space. They are rewarded with tokens on providing proof of knowledge. In this version, individuals are paid im tokens on providing proof of knowledge. In a future version we will have options for individuals to pay to obtain knowledge. 
+3. Individuals - These are people who are curious to learn more about any topic. They are rewarded with tokens on providing proof of knowledge. In this version, individuals are paid im tokens on providing proof of knowledge. In a future version we will have options for individuals to pay to obtain knowledge. 
 
-In the current version proof of knowledge is simple - a webpage with explanations and multiple choice questions related to a topic. 
-Companies set up the web page with description and answers (THIS IS NOT COVERED IN THE CODE HERE). Individuals can log in, provide answers and then be rewarded if they satisfy the winning criteria. 
+In the current version proof of knowledge is simple - a webpage with explanations and multiple choice questions related to a topic.  Companies set up the web page with description and answers (THIS IS NOT COVERED IN THE CODE HERE). Individuals can log in, provide answers and then be rewarded if they satisfy the winning criteria. 
 
 We next provide details about how each of these actors can leverage the LEOS platform. 
 
