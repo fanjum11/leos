@@ -17,9 +17,9 @@ In this project we consider a decentralized approach to learn to earn based on t
 
 LEOS is a **decentralized learning platform leveraging Stacks**.  
 
-The platform in the first version will be a learn to earn system. This system will enable companies to create learning material and to provide EDU tokens as rewards for those who provide proof of learning. The learning material will involve tests.  Anyone can provide answers to the tests as proof of learning. Thus, the test creators create tests that the test takers provide answers for.  A test taker is declared to be a winner if the number of correct answers they provide is above a threshold.  The prize money of the test is then shared amongst all the winners. 
+The platform in the first version will be a learn to earn system and hence the name. This system will enable companies to create learning material and to provide EDU tokens as rewards for those who provide proof of learning. The learning material will involve tests.  Anyone can provide answers to the tests as proof of learning. Thus, the test creators create tests that the test takers provide answers for.  A test taker is declared to be a winner if the number of correct answers they provide is above a threshold.  The prize money of the test is then shared amongst all the winners. 
 
-In this version, LEOs is built on Stacks directly using a EDU-token. In the future I expect LEOS to have it's own Appchain that settles on the Stacks chain.
+In this version, LEOs is built on Stacks directly using a EDU-token. In the future I expect LEOS to plug into a larger decentralized learning system with its own Appchain that settles on the Stacks chain.  We ignore this part of it in this repo for simplicity. 
 
 In addition, in this version we have made an assumption that we can trust the test creators. We intend to relax this assumption in future versions of this project.
 
