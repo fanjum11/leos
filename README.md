@@ -105,7 +105,7 @@ The steps to be followed by the web application (Webapp) used by the individual 
 
 In the future probably the wallet of the individual could get the test questions and learning material, display these to the user, get the user's answers, store the test answers and transmit the answer hash when the test is open. Later the wallet can transmit the detailed answers to the LEOS smart contract once the test is locked. The wallet can then also claim the rewards.  In this manner the individual will not need to trust any third party deploying the web app.  Of course, for now, one can argue that multiple parties can deploy their instance of the web app. Hence a web app that is not acting rationally will not have people using it.
 
-#### HOW TO TEST THIS ON YOUR MACHINE
+## HOW TO TEST THIS ON YOUR MACHINE ##
 
 Get the code on your machine using git clone. We also assume that clarinet is installed on your machine. Given this follow the steps given below. 
 
