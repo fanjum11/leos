@@ -120,7 +120,7 @@ Test taker actions during the test open phase
 ##### Test take getting details of test and deciding a test to answer #####
 The test taker gets the details of the test and decides which test to answer. 
 1. (contract-call? .create_eval_earn get_max_test_id) - getting a list of all tests created so far. 
-2. (contract-call? .create_eval_earn get_test_details u2) - Test taker getting details of test ID 2. this has to be done for all the tests for now. and only open tests in future. 
+2. (contract-call? .create_eval_earn get_test_details u1) - Test taker getting details of test ID 1. this has to be done for all the tests for now. and only open tests in future. 
 
 ##### Test taker answering a test #####
 
