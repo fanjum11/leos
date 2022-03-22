@@ -161,7 +161,7 @@ The contract owner can claim any remainder EDU tokens from test ID 1 (since not 
 1. (contract-call? .create_eval_earn pay_remainder_to_contract_owner u1 .edu-token)
 
 
-##### TEST-SUITE #####
+#### TEST-SUITE ####
 A complete suite of tests to test the various functions under different conditions has also been developed. To execute this run the following command at the CLI 
 
 1. clarinet test
