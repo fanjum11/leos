@@ -1,6 +1,6 @@
 # Learn to earn on Stacks - LEOS
 
-Humans have been learning since times immemorial. And there have been many different methods of teaching.
+Humans have been teaching and learning since times immemorial. And there have been many different methods of teaching.
 
 **Web3 based on blockchain technology provides a decentralized approach towards spreading knowledge.** This I believe will be another effective approach for spreading knowledge on any topic efficiently. 
 
