@@ -9,7 +9,7 @@ However, this approach is a centralized approach. Coinbase controls all aspects 
 
 ## WHAT IS LEOS
 
-The plan here is to build a decentralized learning platform leveraging Stacks - the LEOS platform. The platform will enable companies to create learning material and to provide tokens as rewards for those who provide proof of learning. In addition, we expect this platform to be used by various teams structured as DAOs as they seek to reward the creators and curators of knowledge while the learners will pay for the learnings.
+LEOS is a decentralized learning platform leveraging Stacks - the LEOS platform. The platform will enable companies to create learning material and to provide tokens as rewards for those who provide proof of learning. In addition, we expect this platform to be used by various teams structured as DAOs as they seek to reward the creators and curators of knowledge while the learners will pay for the learnings.
 
 In this version, LEOs is build on Stacks directly using a LEO-token. In the future I expect LEOS to have it's own Appchain and its own token that settles on the Stacks chain. 
 
