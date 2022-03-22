@@ -2,11 +2,11 @@
 
 Humans have been learning since times immemorial. And there have been many different methods of teaching.
 
-Web3 based on blockchain technology provides a decentralized approach towards teaching. This I believe will be another effective approach for spreading knowledge on any topic efficiently. An approach where everyone involved in spreading knowledge can be compensated without having to depend on trusted third parties.
+**Web3 based on blockchain technology provides a decentralized approach towards spreading knowledge.** This I believe will be another effective approach for spreading knowledge on any topic efficiently. An approach where everyone involved in spreading knowledge can be compensated without having to depend on trusted third parties.
 
 This approach towards teaching can be used to educate people about any topic - old traditional topics or new web3 related topics.  And the learners can be future customers who will use the web3 platform or they can be future participants who help advance the concepts. 
 
-In order to bootstrap this new learning approach, we use the Learn to Earn technique. In this case, the learners are provided rewards on demonstrating proof of learning. 
+**In order to bootstrap this new learning approach, we use the Learn to Earn technique.** In this case, the learners are provided rewards on demonstrating proof of learning. 
 
 There have been some efforts towards creating Learn to Earn systems. For example, Coinbase app has the feature whereby you can learn about a token or a web3 company. After that you are asked some questions related to what you learnt and if you provide the right answers you are rewarded some tokens.
 
