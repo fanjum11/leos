@@ -9,7 +9,7 @@ However, this approach is a centralized approach. Coinbase controls all aspects 
 
 ## WHAT IS LEOS
 
-LEOS is a decentralized learning platform leveraging Stacks. The LEOS platform has its own token called the EDU token. The platform will enable companies to create learning material and to provide EDU tokens as rewards for those who provide proof of learning. In addition, we expect this platform to be used by various teams structured as DAOs as they seek to reward the creators and curators of knowledge while the learners will pay for the learnings.
+LEOS is a **decentralized learning platform leveraging Stacks**. The LEOS platform has its own token called the EDU token. The platform will enable companies to create learning material and to provide EDU tokens as rewards for those who provide proof of learning. In addition, we expect this platform to be used by various teams structured as DAOs as they seek to reward the creators and curators of knowledge while the learners will pay for the learnings.
 
 In this version, LEOs is build on Stacks directly using a EDU-token. In the future I expect LEOS to have it's own Appchain that settles on the Stacks chain.
 
@@ -109,61 +109,61 @@ In the future probably the wallet of the individual could get the test questions
 
 Get the code on your machine using git clone. We also assume that clarinet is installed on your machine. Given this follow the steps given below. 
 
-1. clarinet console
+1. *clarinet console*
 
 ##### Test Creator setting up the test #####
 
-1. (contract-call? .create_eval_earn purchase_edu_token .edu-token u100) -- this purchases 100 edu tokens at the cost of 1000 stacks per token
-2. (contract-call? .create_eval_earn test_init .edu-token u10 u8 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1") -- setting up a test with 10 questions, 8 questions to be answered correctly to be the winner, prize amount if 15 EDU tokens, test to be open for 100 blocks, answer hash key being (sha256 (answers + secret)  where answers for 10 multiple choice questions are 0x0a0b0c0d0a0b0c0d0a0b and secret is 1234567890). So (sha256 0x0a0b0c0d0a0b0c0d0a0b1234567890) being as shown. The test creator also has to specify the topic as a string ("Alex coin") and a link where the test and it's material is available as a string ("www.alexcoin.com/test1"). 
+1. *(contract-call? .create_eval_earn purchase_edu_token .edu-token u100)* -- this purchases 100 edu tokens at the cost of 1000 stacks per token
+2. *(contract-call? .create_eval_earn test_init .edu-token u10 u8 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")* -- setting up a test with 10 questions, 8 questions to be answered correctly to be the winner, prize amount if 15 EDU tokens, test to be open for 100 blocks, answer hash key being (sha256 (answers + secret)  where answers for 10 multiple choice questions are 0x0a0b0c0d0a0b0c0d0a0b and secret is 1234567890). So (sha256 0x0a0b0c0d0a0b0c0d0a0b1234567890) being as shown. The test creator also has to specify the topic as a string ("Alex coin") and a link where the test and it's material is available as a string ("www.alexcoin.com/test1"). 
 
 ##### Test taker actions during the test open phase #####
  
 The test taker gets the details of the test and decides which test to answer. 
-1. (contract-call? .create_eval_earn get_max_test_id) - getting a list of all tests created so far. 
-2. (contract-call? .create_eval_earn get_test_details u1) - Test taker getting details of test ID 1. this has to be done for all the tests for now. and only open tests in future. 
+1. *(contract-call? .create_eval_earn get_max_test_id)* - getting a list of all tests created so far. 
+2. *(contract-call? .create_eval_earn get_test_details u1)* - Test taker getting details of test ID 1. this has to be done for all the tests for now. and only open tests in future. 
 
 ##### Test taker answering a test #####
 
-1. (contract-call? .create_eval_earn answer_proof_by_test_taker u1 0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c) - the test taker provides an ID of the test being answered (TEST ID 1 here) and a hash of answers plus secret ; the secret will be different for each test taker. Here I assumed answers = 0x0a0b0c0d0a0b0c0d0a0b secret = 11223344556677889900). Therefore (sha256 0x0a0b0c0d0a0b0c0d0a0b11223344556677889900) is  0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c
+1. *(contract-call? .create_eval_earn answer_proof_by_test_taker u1 0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c)* - the test taker provides an ID of the test being answered (TEST ID 1 here) and a hash of answers plus secret ; the secret will be different for each test taker. Here I assumed answers = 0x0a0b0c0d0a0b0c0d0a0b secret = 11223344556677889900). Therefore (sha256 0x0a0b0c0d0a0b0c0d0a0b11223344556677889900) is  0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c
 
 ##### Once test is closed #####
 Advance the chain tip so that you are in the test grading phase
-1. ::advance_chain_tip 100 
+1. *::advance_chain_tip 100 *
 
 At this point the test creator can provide the detailed answers as
-1. (contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
+1. *(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )*
 
 The test taker can then get a list of correct answers as follows: 
-1. (contract-call? .create_eval_earn get_correct_answers u1)
+1. *(contract-call? .create_eval_earn get_correct_answers u1)*
 
 and if the answers indicate that the test taker is going to be a winner, the test taker can provide detailed answers with proof of having answered the test during the test open interval. And ensure that the test creator is a winnner
 
-1. (contract-call? .create_eval_earn detailed_answers_by_test_takers u1 0x0a0b0c0d0a0b0c0d0a0b 0x11223344556677889900 0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c)
-2. (contract-call? .create_eval_earn did_I_win u1) 
+1. *(contract-call? .create_eval_earn detailed_answers_by_test_takers u1 0x0a0b0c0d0a0b0c0d0a0b 0x11223344556677889900 0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c)*
+2. *(contract-call? .create_eval_earn did_I_win u1)* 
 
 ##### Once grading interval is closed #####
 
-1. ::advance_chain_tip 1000
+1. *::advance_chain_tip 1000*
 
 Test taker to determine the final list of winners: 
-1. (contract-call? .create_eval_earn get_final_list_of_winners u1) - this will give a final list of winners for test ID 1 
+1. *(contract-call? .create_eval_earn get_final_list_of_winners u1)* - this will give a final list of winners for test ID 1 
 
 From this the test taker should determine the EDU tokens that will be awarded to the test taker. If the test taker claims wrong number of EDU tokens as reward, his function call will be be successful. 
-1. (contract-call? .create_eval_earn get_my_award u1 u15 .edu-token)  - so test taker is claiming the 15 EDU tokens as reward for being the winner of test ID 1. 
+1. *(contract-call? .create_eval_earn get_my_award u1 u15 .edu-token)*  - so test taker is claiming the 15 EDU tokens as reward for being the winner of test ID 1. 
 
 
 ##### Once reward interval is closed #####
 
-1. ::advance_chain_tip 10000
+1. *::advance_chain_tip 10000*
 
 The contract owner can claim any remainder EDU tokens from test ID 1 (since not all winners claimed the reward or since some EDU tokens are left over as they could not be evenly divided amongst the winners). In addition, all STX paid by the test creators will also be transferred to the contract owner if one or more EDU tokens are transferred. 
 
-1. (contract-call? .create_eval_earn pay_remainder_to_contract_owner u1 .edu-token)
+1. *(contract-call? .create_eval_earn pay_remainder_to_contract_owner u1 .edu-token)*
 
 
 #### TEST-SUITE ####
 A complete suite of tests to test the various functions under different conditions has also been developed. To execute this run the following command at the CLI 
 
-1. clarinet test
+1. *clarinet test*
 
 
