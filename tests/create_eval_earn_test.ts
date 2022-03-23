@@ -8,7 +8,7 @@ import { assert, assertEquals }
 // ******************COMMENTS *********************
 // I realize some statements such as following are redundant but did not remove the redundant statement in all places
 //block.receipts[0].result.expectOk().expectBool(true);
-//assertEquals("(ok true)", block.receipts[0].result);
+//assertEquals("(ok true)", block.receipts[0].result); 
 
 // I also realize we can use variables to capture values of parameters used in contract calls
 // this will make the contract calls easy to understand 
