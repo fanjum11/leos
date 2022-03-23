@@ -122,7 +122,9 @@ In the future probably the wallet of the individual in combination with the web 
 
 Get the code on your machine using git clone. We also assume that clarinet is installed on your machine. Given this follow the steps given below. 
 
+```clojure
 1. *clarinet console*
+```
 
 ##### Test Creator setting up the test #####
 
