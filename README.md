@@ -131,7 +131,7 @@ Get the code on your machine using git clone. We also assume that clarinet is in
 ```clojure
 1. (contract-call? .create_eval_earn purchase_edu_token .edu-token u100)
 ```
-this purchases 100 edu tokens at the cost of 1000 stacks per token
+this contract-call above purchases 100 edu tokens at the cost of 1000 stacks per token
 ```clojure
 2. (contract-call? .create_eval_earn test_init .edu-token u10 u8 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")
 ```
@@ -147,13 +147,13 @@ getting a list of all tests created so far.
 ```clojure
 2. (contract-call? .create_eval_earn get_test_details u1)
 ```
-Test taker getting details of test ID 1. this has to be done for all the tests for now. and only open tests in future. 
+Test taker getting details of test ID 1 in contract-call above. this has to be done for all the tests for now. and only open tests in future. 
 
 ##### Test taker answering a test #####
 ```clojure
 1. (contract-call? .create_eval_earn answer_proof_by_test_taker u1 0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c)
 ```
-the test taker provides an ID of the test being answered (TEST ID 1 here) and a hash of answers plus secret ; the secret will be different for each test taker. Here I assumed answers = 0x0a0b0c0d0a0b0c0d0a0b secret = 11223344556677889900). Therefore (sha256 0x0a0b0c0d0a0b0c0d0a0b11223344556677889900) is  0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c
+In the contract-call above the test taker provides an ID of the test being answered (TEST ID 1 here) and a hash of answers plus secret ; the secret will be different for each test taker. Here I assumed answers = 0x0a0b0c0d0a0b0c0d0a0b secret = 11223344556677889900). Therefore (sha256 0x0a0b0c0d0a0b0c0d0a0b11223344556677889900) is  0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c
 
 ##### Once test is closed #####
 Advance the chain tip so that you are in the test grading phase
@@ -161,17 +161,17 @@ Advance the chain tip so that you are in the test grading phase
 1. ::advance_chain_tip 100
 ```
 
-At this point the test creator can provide the detailed answers as
+At this point the test creator can provide the detailed answers as in the contract-call below.
 ```clojure
 1. (contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )
 ```
 
-The test taker can then get a list of correct answers as follows: 
+The test taker can then get a list of correct answers as in the contract-call below. 
 ```clojure
 1. (contract-call? .create_eval_earn get_correct_answers u1)
 ```
 
-and if the answers indicate that the test taker is going to be a winner, the test taker can provide detailed answers with proof of having answered the test during the test open interval. And ensure that the test creator is a winnner
+and if the answers indicate that the test taker is going to be a winner, the test taker can provide detailed answers with proof of having answered the test during the test open interval. And ensure that the test creator is a winnner. The two contract-calls corresponding to these are shown below. 
 ```clojure
 1. (contract-call? .create_eval_earn detailed_answers_by_test_takers u1 0x0a0b0c0d0a0b0c0d0a0b 0x11223344556677889900 0xb07d70393a602ce31691215a732f35aafd1d45b6cfb9a54769cda65c5f467f4c)
 
@@ -182,23 +182,24 @@ and if the answers indicate that the test taker is going to be a winner, the tes
 ```clojure
 1. ::advance_chain_tip 1000
 ```
-Test taker to determine the final list of winners: 
+Test taker to determine the final list of winners as in the contract-call below.
 ```clojure
 1. (contract-call? .create_eval_earn get_final_list_of_winners u1)
 ```
 this will give a final list of winners for test ID 1 
 
-From this the test taker should determine the EDU tokens that will be awarded to the test taker. If the test taker claims wrong number of EDU tokens as reward, his function call will be be successful.
+From this the test taker should determine the EDU tokens that will be awarded to the test taker. If the test taker claims wrong number of EDU tokens as reward, his function call will be be successful. A successful contract-call to claim reward tokens is shown below.
 ```clojure
-1. (contract-call? .create_eval_earn get_my_award u1 u15 .edu-token)*  - so test taker is claiming the 15 EDU tokens as reward for being the winner of test ID 1. 
+1. (contract-call? .create_eval_earn get_my_award u1 u15 .edu-token)
 ```
+In the contract-call above, the test taker is claiming the 15 EDU tokens as reward for being the winner of test ID 1 in the contract-call above. 
 
 ##### Once reward interval is closed #####
 ```clojure
 1. ::advance_chain_tip 10000
 ```
 
-The contract owner can claim any remainder EDU tokens from test ID 1 (since not all winners claimed the reward or since some EDU tokens are left over as they could not be evenly divided amongst the winners). In addition, all STX paid by the test creators will also be transferred to the contract owner if one or more EDU tokens are transferred. 
+The contract owner can claim any remainder EDU tokens from test ID 1 (since not all winners claimed the reward or since some EDU tokens are left over as they could not be evenly divided amongst the winners). In addition, all STX paid by the test creators will also be transferred to the contract owner if one or more EDU tokens are transferred. A contract-call to do that is shown below although in this case, the contract owner does not get any EDU tokens since all EDU tokens for test ID 1 have been claimed. And hence the STX associated with the EDU tokens for test ID 1 are also not transferred. 
 ```clojure
 1. (contract-call? .create_eval_earn pay_remainder_to_contract_owner u1 .edu-token)
 ```
