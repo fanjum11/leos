@@ -31,7 +31,7 @@
 (define-constant contract-owner tx-sender)
 (define-constant contract-owner-token-claim-interval u10000)
 (define-constant test-reward-claim-duration u1000)
-(define-constant stx-per-edu-token u1000) ;; mints 1 EDU token
+(define-constant stx-per-edu-token u1000) ;; 
 
 (define-data-var test-id-count uint u0)
 

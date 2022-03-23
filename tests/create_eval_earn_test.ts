@@ -4,11 +4,23 @@ import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarine
 import { assert, assertEquals }
   from 'https://deno.land/std@0.90.0/testing/asserts.ts';
 
-import fc
-  from 'https://cdn.skypack.dev/fast-check';
+
+// ******************COMMENTS *********************
+// I realize some statements such as following are redundant but did not remove the redundant statement in all places
+//block.receipts[0].result.expectOk().expectBool(true);
+//assertEquals("(ok true)", block.receipts[0].result);
+
+// I also realize we can use variables to capture values of parameters used in contract calls
+// this will make the contract calls easy to understand 
+// did not do that since i had developed all tests without that 
+
+// *************************************************
+//import fc
+//  from 'https://cdn.skypack.dev/fast-check';
 
 
-// SOME VALUES USED IN THE TESTS BELOW
+// SOME PARAMETER VALUES USED IN THE TESTS BELOW RELATED TO SECRETS AND HASH
+// We can assign these values to variables in future to improve readability 
 // correct answers by creator
 //(sha256 (answers + secret) 
 //answers = 0x0a0b0c0d0a0b0c0d0a0b secret =1234567890)
@@ -37,12 +49,13 @@ Clarinet.test({
     async fn(chain: Chain, accounts: Map<string, Account>) {
       var deployer = accounts.get("deployer")!;
       var tokenTrait = `${deployer.address}.edu-token`;
+      var edu_token = 1000; 
   
       let block = chain.mineBlock([
         Tx.contractCall(
           "create_eval_earn",
           "purchase_edu_token",
-          [types.principal(tokenTrait), types.uint(1000)],
+          [types.principal(tokenTrait), types.uint(edu_token)],
           deployer.address
         ),
       ]);
