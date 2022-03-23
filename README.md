@@ -141,7 +141,7 @@ The test taker gets the details of the test and decides which test to answer.
 
 ##### Once test is closed #####
 Advance the chain tip so that you are in the test grading phase
-1. *::advance_chain_tip 100 *
+1. *::advance_chain_tip 100*
 
 At this point the test creator can provide the detailed answers as
 1. *(contract-call? .create_eval_earn answers_by_creator u1 0x0a0b0c0d0a0b0c0d0a0b )*
