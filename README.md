@@ -128,8 +128,14 @@ Get the code on your machine using git clone. We also assume that clarinet is in
 
 ##### Test Creator setting up the test #####
 
-1. *(contract-call? .create_eval_earn purchase_edu_token .edu-token u100)* -- this purchases 100 edu tokens at the cost of 1000 stacks per token
-2. *(contract-call? .create_eval_earn test_init .edu-token u10 u8 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")* -- setting up a test with 10 questions, 8 questions to be answered correctly to be the winner, prize amount if 15 EDU tokens, test to be open for 100 blocks, answer hash key being (sha256 (answers + secret)  where answers for 10 multiple choice questions are 0x0a0b0c0d0a0b0c0d0a0b and secret is 1234567890). So (sha256 0x0a0b0c0d0a0b0c0d0a0b1234567890) being as shown. The test creator also has to specify the topic as a string ("Alex coin") and a link where the test and it's material is available as a string ("www.alexcoin.com/test1"). 
+```clojure
+1. *(contract-call? .create_eval_earn purchase_edu_token .edu-token u100)*
+```
+this purchases 100 edu tokens at the cost of 1000 stacks per token
+```clojure
+2. *(contract-call? .create_eval_earn test_init .edu-token u10 u8 u15 u100 0xe34d0b1298ad1ed84f2b154b4b2d86495551ff02c11d82b9abf11aa9795a2c6d "Alex coin" "www.alexcoin.com/test1")*
+```
+setting up a test with 10 questions, 8 questions to be answered correctly to be the winner, prize amount if 15 EDU tokens, test to be open for 100 blocks, answer hash key being (sha256 (answers + secret)  where answers for 10 multiple choice questions are 0x0a0b0c0d0a0b0c0d0a0b and secret is 1234567890). So (sha256 0x0a0b0c0d0a0b0c0d0a0b1234567890) being as shown. The test creator also has to specify the topic as a string ("Alex coin") and a link where the test and it's material is available as a string ("www.alexcoin.com/test1"). 
 
 ##### Test taker actions during the test open phase #####
  
