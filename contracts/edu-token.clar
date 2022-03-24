@@ -1,4 +1,8 @@
 
+;; ACK - this code from the link below with some minor modifications 
+;;https://bitbucket.org/SaadTahirTintash/velocity-charity-dao/src/master/ 
+
+
 (impl-trait .edu-token-trait.edu-token-trait)
 
 (define-constant ERR_NOT_TOKEN_OWNER (err u100))
