@@ -4,4 +4,5 @@ node_rpc_address = "https://stacks-node-api.testnet.stacks.co"
 deployment_fee_rate = 10
 
 [accounts.deployer]
-mnemonic = "<YOUR PRIVATE TESTNET MNEMONIC HERE>"
+mnemonic = ""
+#mnemonic = "<YOUR PRIVATE TESTNET MNEMONIC HERE>"
