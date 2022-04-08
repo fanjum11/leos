@@ -12,6 +12,9 @@ There have been some efforts towards creating Learn to Earn systems. For example
 
 In this project we consider a decentralized approach to learn to earn based on the Stacks platform - a platform that provides for smart contracts on Bitcoin. We use STX as well as a separate EDU token for this system. In the future, we expect this to migrate to a separate Appchain on the Stacks platform.
 
+## OTHER APPLICATIONS - A DAO TOOL
+Before getting into the details of LEOS, I would also like to point out that the mechanism here can also be used as a tool for any DAO. This can be in the form of the DAO **requiring any member to prove that the member has some basic knowledge before they can participate in any of the activities of the DAO.** 
+
 
 ## WHAT IS LEOS
 
