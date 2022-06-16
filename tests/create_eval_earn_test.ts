@@ -1,8 +1,12 @@
-
-import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v0.14.0/index.ts';
+import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v0.31.1/index.ts';
 
 import { assert, assertEquals }
-  from 'https://deno.land/std@0.90.0/testing/asserts.ts';
+  from 'https://deno.land/std@0.125.0/testing/asserts.ts';
+
+
+//import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v0.31.0/index.ts';
+
+//import { assert, assertEquals } from 'https://deno.land/std@0.90.0/testing/asserts.ts';
 
 
 // ******************COMMENTS *********************
@@ -2079,3 +2083,5 @@ Clarinet.test({
     },
   });
 // not testing for errors u1007, u1009, u1010, 1014,1017 
+////import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v0.14.0/index.ts';
+

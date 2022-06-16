@@ -1,0 +1,24 @@
+---
+id: 0
+name: Devnet deployment
+network: devnet
+node: "http://localhost:20443"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: edu-token-trait
+            expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/edu-token-trait.clar
+            cost: 2450
+        - contract-publish:
+            contract-name: edu-token
+            expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/edu-token.clar
+            cost: 8050
+        - contract-publish:
+            contract-name: create_eval_earn
+            expected-sender: ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM
+            path: contracts/create_eval_earn.clar
+            cost: 142920
