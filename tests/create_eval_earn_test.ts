@@ -1986,7 +1986,7 @@ Clarinet.test({
   });
 
 
-
+/* 
   Clarinet.test({
     name: "Ensure that contract owner can claim all token rewards even when no winner",
     async fn(chain: Chain, accounts: Map<string, Account>) {
@@ -2081,7 +2081,7 @@ Clarinet.test({
         assertEquals("(ok true)", lastblock.receipts[0].result);
 
     },
-  });
+  }); */
 // not testing for errors u1007, u1009, u1010, 1014,1017 
 ////import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v0.14.0/index.ts';
 
